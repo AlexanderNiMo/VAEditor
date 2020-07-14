@@ -4,7 +4,11 @@ window.onload = () => {
 # language: ru\n\# encoding: utf-8\n\@UA30_Прочие_макеты\n\n\
 Функциональность: Браузер\n\tКак специалист по тестированию\n\nКонтекст:\n\
 \tДано Я запускаю сценарий открытия TestClient или подключаю уже существующий\n\
-\tОткрывается тест-клиент\n\nСтруктура сценария:\n\t* Открытие формы элемента\n\
+\tОткрывается тест-клиент\n\n\
+Структура сценария:\n\
+';
+    let text = '\
+\t* Открытие формы элемента\n\
 \t\tЕсли Версия платформы ">=" "8.3.6" Тогда \n\
 \t\tИ видеовставка картинки "$ИмяКнопки$" \'$ИмяРеквизита$\' \n\
 \t\tИ это значит что в таблице "$ИмяТаблицы$" есть колонка с именем \'$ИмяРеквизита$\' Тогда\n\
@@ -18,7 +22,10 @@ window.onload = () => {
 \t\tИ видеовставка картинки "ИмяКартинки" "ТекстДиктора"\n\
 \n';
 
-    if (!(['file:', 'http:'].includes(window.location.protocol))) return;
+    for (let i = 0; i < 7; i++) {
+        content += text;
+    }
+
     VanessaGherkinProvider.setKeywords('["и","и это значит что", "к тому же","вот почему","когда","тогда","затем","дано","функция","функционал","функциональность","свойство","предыстория","контекст","сценарий","структура сценария","примеры","допустим","пусть","если","иначеесли","иначе","то","к тому же","также","но","а","feature","functionality","business need","ability","background","scenario outline","scenario","examples","given","when","then","and","but","if","elseif","else"]');
 
     let steps = [{
@@ -134,24 +141,26 @@ window.onload = () => {
     ];
     VanessaEditor.addCommands(JSON.stringify(commands));
 
-    let subcode = '\tК тому же шаг подсценария 1\n\t\tИ шаг подсценария 2\n\t\n\t\t\tИ шаг подсценария 3\n\t\t\tИ шаг подсценария 4\n\t\
-    И шаг подсценария 5\n\t\t\tИ шаг подсценария 6\n\n\t\tИ шаг подсценария 7\n\t\t\tИ шаг подсценария 8\n\tИ шаг подсценария 9';
-    VanessaEditor.showRuntimeCode(15, subcode);
-    VanessaEditor.showRuntimeCode(20, subcode + "\n");
+    let subcode = '\tК тому же шаг подсценария 1\n\t\tИ шаг подсценария 2\n\t\t\tИ шаг подсценария 3\n\t\t\tИ шаг подсценария 4\n\t\
+    И шаг подсценария 5\n\t\t\tИ шаг подсценария 6\n\t\tИ шаг подсценария 7\n\t\t\tИ шаг подсценария 8\n\tИ шаг подсценария 9';
 
-    setInterval(() => VanessaEditor.runtimeManager.next(), 500);
+    for (let i = 2; i < 20; i++) {
+        VanessaEditor.showRuntimeCode(i * 5, subcode);
+    }
 /*
-    let problems = [{
-        "lineNumber": 12,
-        "severity": "Warning",
-        "message": "Runtime error",
-        "code": "0x1005",
-        "source": "Data info",
-    }];
-    VanessaEditor.decorateProblems(JSON.stringify(problems));
+    setInterval(() => VanessaEditor.runtimeManager.next(), 500);
+    /*
+        let problems = [{
+            "lineNumber": 12,
+            "severity": "Warning",
+            "message": "Runtime error",
+            "code": "0x1005",
+            "source": "Data info",
+        }];
+        VanessaEditor.decorateProblems(JSON.stringify(problems));
 
-    let error = "Runtime error info";
-    VanessaEditor.setRuntimeProgress("error", 13);
-    VanessaEditor.showRuntimeError(13, 0, "0x01", error);
-*/
+        let error = "Runtime error info";
+        VanessaEditor.setRuntimeProgress("error", 13);
+        VanessaEditor.showRuntimeError(13, 0, "0x01", error);
+    */
 }
